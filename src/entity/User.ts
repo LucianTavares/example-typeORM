@@ -12,9 +12,10 @@ export class UserSchema {
     @Column()
     password: string;
 
+    // @OneToOne(() => UserPreferenceSchema)
     @OneToOne(
         () => UserPreferenceSchema,
-        (userPreferenceSchema) => userPreferenceSchema.user,
+        (preference) => preference.user,
         {
             eager: true,
             cascade: true
