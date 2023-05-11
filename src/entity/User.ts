@@ -1,5 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
-import { UserPreferenceSchema } from "./UserPreference";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('user')
 export class UserSchema {
@@ -11,16 +10,4 @@ export class UserSchema {
 
     @Column()
     password: string;
-
-    // @OneToOne(() => UserPreferenceSchema)
-    @OneToOne(
-        () => UserPreferenceSchema,
-        (preference) => preference.user,
-        {
-            eager: true,
-            cascade: true
-        },
-    )
-    @JoinColumn()
-    preference: UserPreferenceSchema;
 }

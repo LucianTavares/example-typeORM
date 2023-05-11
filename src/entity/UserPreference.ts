@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryColumn, JoinColumn } from "typeorm";
 import { UserSchema } from "./User";
 
 @Entity('user_preference')
@@ -15,6 +15,13 @@ export class UserPreferenceSchema {
   @Column({ nullable: true })
   documentNumber: string;
 
-  @OneToOne(() => UserSchema, (user) => user.preference)
+  @OneToOne(() => UserSchema, (user) => user.id, {
+    eager: true,
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
+
+  @JoinColumn()
   user: UserSchema;
 }
